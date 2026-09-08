@@ -1,0 +1,8 @@
+architecture,flat_macro_f1,shared_hard_macro_f1,oracle_macro_f1,provenance
+efficientnet_b0,0.6192,0.5686,0.777,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP
+densenet121,0.6351,0.5609,0.7659,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP
+densenet169,0.6493,0.5427,0.7251,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP
+resnet50,0.641,0.547,0.7457,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP
+mobilenet_v3_large,0.619,0.637,0.8063,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP
+efficientnet_b2,0.62,0.5808,0.7492,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP
+efficientnet_b3,0.626,0.5944,0.7961,Supplied DOCX tables; rounded; final seven-backbone prediction evidence absent from ZIP

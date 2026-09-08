@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: efficientnet_b3
+system_type: flat
+experiment_id: flat_efficientnet_b3_seed42

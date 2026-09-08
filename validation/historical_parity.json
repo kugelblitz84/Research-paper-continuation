@@ -1,0 +1,119 @@
+{
+  "model_parity": [
+    {
+      "architecture": "efficientnet_b0",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 4012672,
+      "status": "PASS"
+    },
+    {
+      "architecture": "densenet121",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 6957956,
+      "status": "PASS"
+    },
+    {
+      "architecture": "densenet169",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 12491140,
+      "status": "PASS"
+    },
+    {
+      "architecture": "resnet50",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 23516228,
+      "status": "PASS"
+    },
+    {
+      "architecture": "mobilenet_v3_large",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 4207156,
+      "status": "PASS"
+    },
+    {
+      "architecture": "efficientnet_b2",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 7706630,
+      "status": "PASS"
+    },
+    {
+      "architecture": "efficientnet_b3",
+      "system": "flat",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 10702380,
+      "status": "PASS"
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 4020358,
+      "status": "PASS"
+    },
+    {
+      "architecture": "densenet121",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 6964106,
+      "status": "PASS"
+    },
+    {
+      "architecture": "densenet169",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 12501130,
+      "status": "PASS"
+    },
+    {
+      "architecture": "resnet50",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 23528522,
+      "status": "PASS"
+    },
+    {
+      "architecture": "mobilenet_v3_large",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 2981562,
+      "status": "PASS"
+    },
+    {
+      "architecture": "efficientnet_b2",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 7715084,
+      "status": "PASS"
+    },
+    {
+      "architecture": "efficientnet_b3",
+      "system": "shared_hard",
+      "eval_max_abs_difference": 0.0,
+      "train_max_abs_difference": 0.0,
+      "parameter_count": 10711602,
+      "status": "PASS"
+    }
+  ],
+  "transforms_train_eval": "bitwise_equal",
+  "weights": "none; identical seed; no pretrained download",
+  "scope": "CPU forward parity, not real training reproduction"
+}

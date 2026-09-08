@@ -1,0 +1,108 @@
+{
+  "status": "build_complete_training_not_started",
+  "pytest": {
+    "tests": "33",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "4.557"
+  },
+  "notebooks": [
+    {
+      "notebook": "00_environment_and_protocol_audit.ipynb",
+      "schema": "PASS",
+      "fresh_kernel_execution": "PASS",
+      "code_cells": 4,
+      "mode": "default safe controls; real training/evaluation not executed"
+    },
+    {
+      "notebook": "01_dataset_and_split_verification.ipynb",
+      "schema": "PASS",
+      "fresh_kernel_execution": "PASS",
+      "code_cells": 3,
+      "mode": "default safe controls; real training/evaluation not executed"
+    },
+    {
+      "notebook": "02_flat_training.ipynb",
+      "schema": "PASS",
+      "fresh_kernel_execution": "PASS",
+      "code_cells": 4,
+      "mode": "default safe controls; real training/evaluation not executed"
+    },
+    {
+      "notebook": "03_shared_hierarchical_training.ipynb",
+      "schema": "PASS",
+      "fresh_kernel_execution": "PASS",
+      "code_cells": 4,
+      "mode": "default safe controls; real training/evaluation not executed"
+    },
+    {
+      "notebook": "04_internal_test_evaluation.ipynb",
+      "schema": "PASS",
+      "fresh_kernel_execution": "PASS",
+      "code_cells": 2,
+      "mode": "default safe controls; real training/evaluation not executed"
+    },
+    {
+      "notebook": "05_flat_vs_hierarchical_comparison.ipynb",
+      "schema": "PASS",
+      "fresh_kernel_execution": "PASS",
+      "code_cells": 4,
+      "mode": "default safe controls; real training/evaluation not executed"
+    }
+  ],
+  "static_checks": "ruff check and format check passed",
+  "historical_model_paths_matched": 14,
+  "historical_bootstrap_replicates_replayed": 10000,
+  "real_training_runs": 0,
+  "real_checkpoints": 0,
+  "files": {
+    "src/artifacts.py": "8a7be97c90d9468808930bc71f65f0490796aa7c2bbb47fd278ab61140c48760",
+    "src/config.py": "27c72482745b7975fdecfa0aa5586195afc2d4c72543819c985ba6b03055504d",
+    "src/data.py": "7435461aa60d5b1dfce79857aa87cb380866508f9fc9391b5a8ab4ef0f47ef29",
+    "src/evaluation.py": "b5f4917c0a4e2f8a380d33170047904ad030b79b769b24ec9a7cf32562de456e",
+    "src/losses.py": "cb1c8d8084bd0152b4c31e70bbfbcc1d9f779e8bf047694450917122542a8ac2",
+    "src/metrics.py": "1577ce88a16f485a199335f81c204bb80223637ec505a5497b54f592c4717212",
+    "src/reporting.py": "d7816d778d8fe69d6d2084803b184598dafaff77574e223b1c043a640cb4e464",
+    "src/reproducibility.py": "beab20edb7496a6d4a5a2214bfda9ba296857b7f94339aaf834114171e8536f5",
+    "src/routing.py": "6d92a79e35e13b609b4cac3ecf08114268c99bf93b32908bd0c61953e5d77005",
+    "src/statistics.py": "569d21f7b268afa3d4ca13c1112fcba7bd79afec1eac797e56a45ca495c0bf35",
+    "src/training.py": "36f08b7a46cf2c9d9229f23a4a8068c940fe5553d168b952952594ae9f9096a2",
+    "src/transforms.py": "5f394416516bf66de0e17532793670dc3e7321fc03cd72ac4c1dc0925e8d74f5",
+    "src/__init__.py": "7c696ff3deb4ae1ee21e0c2b2ffcd0a937707900c0a0706e3a6364dc3b8bd343",
+    "src/models/backbones.py": "ed31e6e6abb0f491d81773e5b8193f17838781ffd1185370e1d17531c2fe7961",
+    "src/models/systems.py": "c3c0772fe9bb74c0a505fa6dd38fe2aa22627cea67c053a65c4955abcdb2d464",
+    "src/models/__init__.py": "40804c2ecd36a39e51e9c339581776c9f8df3c9c34893687d88941a75eba6592",
+    "configs/protocol.yaml": "a1128593fa8d1a7ee86ec5d50eab70855bd844338534083436dd11169f8852ce",
+    "configs/protocol_lock.json": "b59c97fe117e81f791b96af14ded4f412e1b6c4945bf05cd5d7eb7c1903a9531",
+    "configs/experiments/flat/densenet121.yaml": "33ef746c5da96c0466ab385d9e65dadb7c7ebe2ca801eecb426cdbe2028f09be",
+    "configs/experiments/flat/densenet169.yaml": "14c5c336772b6f69510c55a5b269a1d37b94dd58a52d4212f811dc6f52e8549e",
+    "configs/experiments/flat/efficientnet_b0.yaml": "2833c83b12314d914839580e4695cca4ee5c1f757f7b8e0e73c14ca8241e2f3c",
+    "configs/experiments/flat/efficientnet_b2.yaml": "1e5b59660721d67e0a366f702551684e4a13601cb83e1096fee176351b11341a",
+    "configs/experiments/flat/efficientnet_b3.yaml": "65ebeb31e9af603a04aa467b8d4c75d056859934768b1d6b57eafb0ef84ed5c9",
+    "configs/experiments/flat/mobilenet_v3_large.yaml": "e98c5a5c1d8e0753464dcb16244b06b71057d075ab35a1808b65a5c7ee6fd889",
+    "configs/experiments/flat/resnet50.yaml": "d39a764d71eace124d3de6e5a49333d5b872fbad10b322c305354545227bb947",
+    "configs/experiments/shared_hard/densenet121.yaml": "accaa6101f1537ffb2ee9a6682d4ca753fdb9f840f9672bc8fe0f3a812196df9",
+    "configs/experiments/shared_hard/densenet169.yaml": "57f76ea267e28823a11c2707c9b24653b9dff4e0202a61220b4bd8ea6455986e",
+    "configs/experiments/shared_hard/efficientnet_b0.yaml": "5255997bb11dec7b88d0d8600ecde6f925d853836acc84e347b91e433aacc8e7",
+    "configs/experiments/shared_hard/efficientnet_b2.yaml": "55e22e1d8b58923402499e66a0a3dca89fd58747ad3473bdfc6afe5b67731c88",
+    "configs/experiments/shared_hard/efficientnet_b3.yaml": "7113c0beb7e7e25dea422ddf3ea03ebeb3e8adf37d2b019e52c1661e745600c5",
+    "configs/experiments/shared_hard/mobilenet_v3_large.yaml": "376a9d2162bbbd5bb70d7bf1744e77b72907c4dbbf8570b181154a00dd0ffcb9",
+    "configs/experiments/shared_hard/resnet50.yaml": "29d4de807fa447329e570a66ddd96145efdc3c927026c78640b042253d60c31a",
+    "notebooks/00_environment_and_protocol_audit.ipynb": "1c5befdc9d745a0d1950a9582bd6794ce0677f397010e3b5bdd4c88f91a791f0",
+    "notebooks/01_dataset_and_split_verification.ipynb": "48ee5498ea92ce1491660eef65e93a9e663680188681bfec6d29c01853cc9759",
+    "notebooks/02_flat_training.ipynb": "85375b2c2f2dcad7fc2f538f4399acc6379db52be8138d4718701400a43b4779",
+    "notebooks/03_shared_hierarchical_training.ipynb": "d6c220e6e31c758f602df45d3ad8b4fe1673d5ff77e8ca9d491bbe6597d0c6f7",
+    "notebooks/04_internal_test_evaluation.ipynb": "98f9757d5d8a4a12851ad69a35b08bc0f4b4fc4fb6c306805f5eec6dd5ddaae0",
+    "notebooks/05_flat_vs_hierarchical_comparison.ipynb": "8090d0fc2db2464e6d98322f81e46aadbe9756698c4bd66775d79a3a9982d92e",
+    "tests/conftest.py": "6c98a92636706d962b87e6106bfb3b87b2ccca342f2b700cfa2cab493364e303",
+    "tests/test_artifacts.py": "27c3d43987c47b6b1fc5311f4ada7dd2f43d540e06c07cf8ecc87bb9220a20c0",
+    "tests/test_protocol.py": "98de9b37543fe890a06835c35eb090e32addd0034f4b9493580ffa71c3545481",
+    "tests/test_statistics.py": "28ab9fe7b52626d400adba00a01fe34c768d36c155992ac655687a5fa197ce22",
+    "tests/test_workflow.py": "13d5f3d295c75636e6bad4f6928484fe6f6163e04c749efdc296948b777da201",
+    "tools/import_reference.py": "8bfb8140c9901f6a80fb75ddba93bf8a0921a73137dd8a9f34cb406ec5783795",
+    "tools/replay_historical_statistics.py": "5edef28d8f66709ffbbb57268de542a06054d413dc48ce4f0d47896c66bf4c2e",
+    "tools/validate_notebooks.py": "f42d71029412f716bace4cfb357d33e3733a0433003d4ff1fbc0ebd59ac132e4",
+    "tools/verify_historical_parity.py": "ab97d95916316c906fb325cf739bd34d9e22d88c20083e32363446d404bd7267"
+  }
+}

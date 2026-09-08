@@ -1,0 +1,11 @@
+{
+  "python": "3.11.9 (main, Aug 14 2024, 04:18:20) [MSC v.1929 64 bit (AMD64)]",
+  "torch": "2.13.0+cpu",
+  "torchvision": "0.28.0+cpu",
+  "numpy": "2.4.6",
+  "cuda": null,
+  "cudnn": null,
+  "gpu": null,
+  "os": "Windows-10-10.0.19045-SP0",
+  "git_commit": null
+}

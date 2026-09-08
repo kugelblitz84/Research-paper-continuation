@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: mobilenet_v3_large
+system_type: flat
+experiment_id: flat_mobilenet_v3_large_seed42

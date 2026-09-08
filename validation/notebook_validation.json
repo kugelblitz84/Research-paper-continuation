@@ -1,0 +1,44 @@
+[
+  {
+    "notebook": "00_environment_and_protocol_audit.ipynb",
+    "schema": "PASS",
+    "fresh_kernel_execution": "PASS",
+    "code_cells": 4,
+    "mode": "default safe controls; real training/evaluation not executed"
+  },
+  {
+    "notebook": "01_dataset_and_split_verification.ipynb",
+    "schema": "PASS",
+    "fresh_kernel_execution": "PASS",
+    "code_cells": 3,
+    "mode": "default safe controls; real training/evaluation not executed"
+  },
+  {
+    "notebook": "02_flat_training.ipynb",
+    "schema": "PASS",
+    "fresh_kernel_execution": "PASS",
+    "code_cells": 4,
+    "mode": "default safe controls; real training/evaluation not executed"
+  },
+  {
+    "notebook": "03_shared_hierarchical_training.ipynb",
+    "schema": "PASS",
+    "fresh_kernel_execution": "PASS",
+    "code_cells": 4,
+    "mode": "default safe controls; real training/evaluation not executed"
+  },
+  {
+    "notebook": "04_internal_test_evaluation.ipynb",
+    "schema": "PASS",
+    "fresh_kernel_execution": "PASS",
+    "code_cells": 2,
+    "mode": "default safe controls; real training/evaluation not executed"
+  },
+  {
+    "notebook": "05_flat_vs_hierarchical_comparison.ipynb",
+    "schema": "PASS",
+    "fresh_kernel_execution": "PASS",
+    "code_cells": 4,
+    "mode": "default safe controls; real training/evaluation not executed"
+  }
+]
