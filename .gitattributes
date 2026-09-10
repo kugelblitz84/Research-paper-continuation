@@ -1,0 +1,2 @@
+# Frozen scientific manifests are byte-locked; preserve exact bytes on every platform.
+data/manifests/*.csv -text
