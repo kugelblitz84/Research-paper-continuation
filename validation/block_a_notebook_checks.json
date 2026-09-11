@@ -1,0 +1,22 @@
+[
+  {
+    "notebook": "notebooks\\06_shared_soft_training.ipynb",
+    "status": "passed",
+    "cells": 6
+  },
+  {
+    "notebook": "notebooks\\07_dedicated_hard_training.ipynb",
+    "status": "passed",
+    "cells": 6
+  },
+  {
+    "notebook": "notebooks\\08_dedicated_soft_training.ipynb",
+    "status": "passed",
+    "cells": 6
+  },
+  {
+    "notebook": "notebooks\\09_block_a_status.ipynb",
+    "status": "passed",
+    "cells": 5
+  }
+]

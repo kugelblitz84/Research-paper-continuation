@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: resnet50
+system_type: dedicated_soft
+experiment_id: dedicated_soft_resnet50_seed42

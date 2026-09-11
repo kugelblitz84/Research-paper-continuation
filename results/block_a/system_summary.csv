@@ -1,0 +1,6 @@
+system_type,system_code,count,status,mean,median,delta_vs_flat,flat_matched_count,delta_vs_h1,h1_matched_count
+flat,F,0,INCOMPLETE,,,,0,,0
+shared_hard,H1,0,INCOMPLETE,,,,0,,0
+shared_soft,H2,0,INCOMPLETE,,,,0,,0
+dedicated_hard,H3,0,INCOMPLETE,,,,0,,0
+dedicated_soft,H4,0,INCOMPLETE,,,,0,,0

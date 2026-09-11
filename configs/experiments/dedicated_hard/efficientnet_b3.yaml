@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: efficientnet_b3
+system_type: dedicated_hard
+experiment_id: dedicated_hard_efficientnet_b3_seed42

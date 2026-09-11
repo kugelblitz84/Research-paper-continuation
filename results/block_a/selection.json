@@ -1,0 +1,9 @@
+{
+  "status": "INCOMPLETE",
+  "advancing": [],
+  "selected_system": null,
+  "metric": "mean validation endpoint macro_f1",
+  "near_tie_tolerance": 0.005,
+  "required_cells": 35,
+  "available_cells": 0
+}

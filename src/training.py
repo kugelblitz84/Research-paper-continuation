@@ -1,6 +1,7 @@
-"""One resumable orchestration loop for the two frozen baseline families."""
+"""One resumable orchestration loop; new scientific policies require explicit configuration."""
 
 import json
+import time
 import traceback
 import uuid
 from pathlib import Path
@@ -29,6 +30,7 @@ from src.reproducibility import (
     seed_everything,
     sha256,
 )
+from src.routing import endpoint_output
 
 
 def preflight(config, data_root=None, *, verify_hashes=True):
@@ -77,7 +79,17 @@ def training_epoch(model, loader, config, device, optimizer, scaler, criterion):
             dtype=torch.float16,
             enabled=config["training"]["amp"] and device.type == "cuda",
         ):
-            outputs = model(x)
+            if config["system_type"].startswith("dedicated"):
+                # Task-2 sees only labelled malignant training images, including BN updates.
+                mask = batch["masks"][:, 1].to(device)
+                task2 = x.new_zeros((len(x), 3))
+                if mask.any():
+                    task2 = task2.index_copy(
+                        0, mask.nonzero().flatten(), model.task2(x[mask]).to(x.dtype)
+                    )
+                outputs = {"task1": model.task1(x), "task2": task2}
+            else:
+                outputs = model(x)
             if config["system_type"] == "flat":
                 loss = torch.nn.functional.cross_entropy(outputs, batch["target"].to(device))
             else:
@@ -110,6 +122,17 @@ def training_epoch(model, loader, config, device, optimizer, scaler, criterion):
 def validation_epoch(model, loaders, config, device):
     model.eval()
     scores = {}
+    if config["system_type"] not in ("flat", "shared_hard"):
+        truth, predicted = [], []
+        for batch in loaders["task1"]:
+            out = model(batch["image"].to(device))
+            pred, _ = endpoint_output(out, config["system_type"])
+            truth.extend(batch["target"].tolist())
+            predicted.extend(pred.cpu().tolist())
+        score = classification_metrics(truth, predicted, CLASSES)["macro_f1"]
+        if config["selection"].get(config["system_type"]) != "validation_macro_f1":
+            raise ValueError("Unsupported new-system validation selection policy")
+        return {"val_validation_macro_f1": score, "selection_score": score}
     keys = ("validation",) if config["system_type"] == "flat" else ("task1", "task2", "task3")
     for key in keys:
         y, p = [], []
@@ -184,6 +207,18 @@ def train(
             "experiment_id": config["experiment_id"],
         }
     validate_runtime_config(config)
+    from src.run_experiment import disposition
+
+    if experiment_id is not None and experiment_id != config["experiment_id"]:
+        raise ValueError("Run ID must match the resolved experiment identity")
+    action = disposition(config, root=ROOT, resume=resume)
+    if action not in ("RUN", "RESUME"):
+        return {"experiment_id": config["experiment_id"], "status": action}
+    if config["system_type"] not in config["selection"]:
+        raise ValueError(
+            "New system selection policy is absent from the frozen protocol; "
+            "an explicitly approved protocol extension is required"
+        )
     _allow_backbone(config)
     preflight(config, data_root)
     device = torch.device(device)
@@ -202,6 +237,7 @@ def train(
 
 
 def _run(config, directory, run_id, data_root, device, resume):
+    started_monotonic = time.monotonic()
     seed_everything(config["seed"])
     manifest_hashes = {s: sha256(ROOT / p) for s, p in config["manifests"].items()}
     config_hash = digest(config)
@@ -238,6 +274,22 @@ def _run(config, directory, run_id, data_root, device, resume):
         best_validation_score="",
         checkpoint_path="",
         status="running",
+        config_hash=config_hash,
+        protocol_hash=digest(
+            {
+                k: v
+                for k, v in config.items()
+                if k
+                not in (
+                    "architecture",
+                    "system_type",
+                    "experiment_id",
+                    "config_path",
+                    "protocol",
+                    "block_a_extension",
+                )
+            }
+        ),
     )
     append_registry(row)
     write_json(directory / "run_summary.json", row)
@@ -245,9 +297,7 @@ def _run(config, directory, run_id, data_root, device, resume):
         loaders = training_loaders(config, resolve_data_root(data_root))
         model = build_model(config, pretrained=False if resume else None).to(device)
         optimizer, scheduler, scaler = optimizer_components(model, config, device)
-        criterion = (
-            MaskedLoss(config).to(device) if config["system_type"] == "shared_hard" else None
-        )
+        criterion = MaskedLoss(config).to(device) if config["system_type"] != "flat" else None
         history, best_score, best_epoch, bad, start = [], -1.0, 0, 0, 1
         best_ref = None
         if state:
@@ -310,6 +360,8 @@ def _run(config, directory, run_id, data_root, device, resume):
                     },
                 },
                 config_snapshot=config,
+                protocol_hash=row["protocol_hash"],
+                selection_metric=row["selection_metric"],
                 config_hash=config_hash,
                 manifest_hashes=manifest_hashes,
                 torch_version=str(torch.__version__),
@@ -317,6 +369,11 @@ def _run(config, directory, run_id, data_root, device, resume):
                 environment=environment(),
                 rng_state=capture_rng(loaders),
                 history=history,
+                training_duration_seconds=(
+                    state.get("training_duration_seconds", 0) if state else 0
+                )
+                + time.monotonic()
+                - started_monotonic,
                 start_time=row["start_time"],
                 run_id=run_id,
             )
@@ -340,21 +397,91 @@ def _run(config, directory, run_id, data_root, device, resume):
             print(line, flush=True)
         if best_ref is None:
             raise RuntimeError("No validation-selected checkpoint")
+        frozen = {
+            "best": best_ref,
+            "config_hash": config_hash,
+            "manifest_hashes": manifest_hashes,
+            "frozen_at": utc_now(),
+        }
+        if config["system_type"].startswith("dedicated"):
+            selected = load_checkpoint(best_ref)
+            components = {}
+            for name in ("task1", "task2"):
+                component_path = ROOT / Path(best_ref["path"]).parent / f"{name}_best.pt"
+                # Separate immutable component files plus the joint resume/system checkpoint.
+                component_payload = {
+                    k: selected[k]
+                    for k in (
+                        "run_id",
+                        "config_hash",
+                        "manifest_hashes",
+                        "best_epoch",
+                        "best_validation_score",
+                        "architecture",
+                        "system_type",
+                        "seed",
+                        "config_snapshot",
+                    )
+                }
+                component_payload.update(
+                    component=name,
+                    model_state_dict={
+                        k[len(name) + 1 :]: v
+                        for k, v in selected["model_state_dict"].items()
+                        if k.startswith(name + ".")
+                    },
+                )
+                if component_path.exists():
+                    ref = {
+                        "path": component_path.relative_to(ROOT).as_posix(),
+                        "sha256": sha256(component_path),
+                    }
+                    prior = load_checkpoint(ref)
+                    if (
+                        prior["config_hash"] != config_hash
+                        or prior["component"] != name
+                        or prior["best_epoch"] != best_epoch
+                        or prior["model_state_dict"].keys()
+                        != component_payload["model_state_dict"].keys()
+                        or any(
+                            not torch.equal(v, prior["model_state_dict"][k])
+                            for k, v in component_payload["model_state_dict"].items()
+                        )
+                    ):
+                        raise ValueError("Existing component checkpoint differs")
+                else:
+                    ref = save_checkpoint(component_path, component_payload)
+                components[name] = ref
+            frozen["components"] = components
+        from src.validation_results import persist_validation
+
+        validation_loader = (
+            loaders["validation"] if config["system_type"] == "flat" else loaders["task1"]
+        )
+        validation = persist_validation(
+            model,
+            validation_loader,
+            config,
+            device,
+            run_id,
+            frozen,
+            root=ROOT,
+            duration_seconds=(state.get("training_duration_seconds", 0) if state else 0)
+            + time.monotonic()
+            - started_monotonic,
+        )
+        write_json(directory / "frozen_checkpoint.json", frozen)
         row.update(
             status="completed",
             end_time=utc_now(),
             best_epoch=best_epoch,
             best_validation_score=best_score,
             checkpoint_path=best_ref["path"],
-        )
-        write_json(
-            directory / "frozen_checkpoint.json",
-            {
-                "best": best_ref,
-                "config_hash": config_hash,
-                "manifest_hashes": manifest_hashes,
-                "frozen_at": utc_now(),
-            },
+            checkpoint_sha256=best_ref["sha256"],
+            validation_macro_f1=validation["metrics"]["endpoint"]["macro_f1"],
+            training_duration_seconds=(state.get("training_duration_seconds", 0) if state else 0)
+            + time.monotonic()
+            - started_monotonic,
         )
     except BaseException:
         row.update(status="interrupted", end_time=utc_now())
@@ -364,4 +491,15 @@ def _run(config, directory, run_id, data_root, device, resume):
     finally:
         write_json(directory / "run_summary.json", row)
         append_registry(row)
+        if row["status"] != "completed":
+            try:
+                from src.results_registry import rebuild
+
+                rebuild(ROOT)
+            except Exception:
+                with (directory / "logs/index_error.log").open("a", encoding="utf-8") as log:
+                    log.write(traceback.format_exc())
+    from src.results_registry import rebuild
+
+    rebuild(ROOT)
     return row

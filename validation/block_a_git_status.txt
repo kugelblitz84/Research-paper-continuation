@@ -1,0 +1,34 @@
+ M .gitignore
+ M README.md
+ M src/config.py
+ M src/data.py
+ M src/evaluation.py
+ M src/losses.py
+ M src/models/systems.py
+ M src/routing.py
+ M src/training.py
+ M tests/test_workflow.py
+?? configs/experiments/dedicated_hard/
+?? configs/experiments/dedicated_soft/
+?? configs/experiments/shared_soft/
+?? docs/BLOCK_A_INFRASTRUCTURE.md
+?? docs/BLOCK_A_PROTOCOL_PROPOSAL.md
+?? experiments/checkpoint_registry.csv
+?? notebooks/06_shared_soft_training.ipynb
+?? notebooks/07_dedicated_hard_training.ipynb
+?? notebooks/08_dedicated_soft_training.ipynb
+?? notebooks/09_block_a_status.ipynb
+?? results/block_a/
+?? results/master_results.csv
+?? src/block_a.py
+?? src/experiment_catalog.py
+?? src/predictions.py
+?? src/results_registry.py
+?? src/run_block_a.py
+?? src/run_experiment.py
+?? src/validation_results.py
+?? tests/test_block_a.py
+?? validation/block_a_notebook_checks.json
+?? validation/block_a_preservation_before.json
+?? validation/block_a_preservation_check.json
+?? validation/block_a_pytest.xml

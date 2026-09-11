@@ -1,0 +1,10 @@
+Backbone,Flat,H1_Shared_Hard,H2_Shared_Soft,H3_Dedicated_Hard,H4_Dedicated_Soft
+DenseNet121,,,,,
+DenseNet169,,,,,
+ResNet50,,,,,
+MobileNetV3-Large,,,,,
+EfficientNet-B0,,,,,
+EfficientNet-B2,,,,,
+EfficientNet-B3,,,,,
+Mean,,,,,
+Median,,,,,

@@ -18,6 +18,7 @@ class MaskedLoss(nn.Module):
         )
         self.gamma = config["losses"]["gamma"]
         self.weights = config["losses"]["task_weights"]
+        self.task_sizes = (2, 3, 5) if config["system_type"] == "shared_hard" else (2, 3)
 
     def forward(self, logits, targets, masks):
         if (
@@ -29,7 +30,7 @@ class MaskedLoss(nn.Module):
         ):
             raise ValueError("Expected long Nx3 targets and boolean masks")
         losses, counts, weighted, denominator = {}, {}, [], 0.0
-        for i, size in enumerate((2, 3, 5)):
+        for i, size in enumerate(self.task_sizes):
             key = f"task{i + 1}"
             if logits[key].shape != (len(targets), size):
                 raise ValueError("Wrong task output dimensions")

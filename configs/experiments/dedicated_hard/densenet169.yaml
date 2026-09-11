@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: densenet169
+system_type: dedicated_hard
+experiment_id: dedicated_hard_densenet169_seed42

@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: efficientnet_b0
+system_type: shared_soft
+experiment_id: shared_soft_efficientnet_b0_seed42

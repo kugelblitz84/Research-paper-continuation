@@ -1,0 +1,11 @@
+ .gitignore             |  11 ++++
+ README.md              |  12 ++--
+ src/config.py          |   3 +
+ src/data.py            |   6 ++
+ src/evaluation.py      |  88 +++-----------------------
+ src/losses.py          |   3 +-
+ src/models/systems.py  |  57 ++++++++++++++++-
+ src/routing.py         |  27 ++++++++
+ src/training.py        | 166 ++++++++++++++++++++++++++++++++++++++++++++-----
+ tests/test_workflow.py |  84 ++++++++++++++++++++++++-
+ 10 files changed, 353 insertions(+), 104 deletions(-)

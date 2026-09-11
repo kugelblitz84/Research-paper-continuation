@@ -175,7 +175,8 @@ def test_training_to_frozen_evaluation_and_statistics(workspace):
     assert result["bootstrap"]["replicates"] == 10
     assert (directory / "historical_vs_reconstructed.csv").is_file()
     registry = pd.read_csv(root / "experiments/experiment_registry.csv")
-    assert registry.status.tolist() == ["running", "completed", "running", "completed"]
+    synthetic = registry[registry.experiment_id.isin(["flat", "shared_hard"])]
+    assert synthetic.status.tolist() == ["running", "completed", "running", "completed"]
 
 
 def test_resume_rejects_scientific_drift(workspace, monkeypatch):
@@ -195,3 +196,84 @@ def test_resume_rejects_scientific_drift(workspace, monkeypatch):
     c["training"]["lr"] *= 2
     with pytest.raises(ValueError, match="config or manifest"):
         execute(c, root, "drift", True)
+
+
+@pytest.mark.parametrize("system", ["shared_soft", "dedicated_hard", "dedicated_soft"])
+def test_new_system_synthetic_lifecycle(workspace, monkeypatch, system):
+    from src import results_registry
+    from src.models import systems
+    from src.models.backbones import EncoderParts
+
+    root, c = workspace
+    c["system_type"] = system
+    # Synthetic policy injection tests the plumbing without changing the scientific lock.
+    c["selection"][system] = "validation_macro_f1"
+    c["experiment_id"] = f"{system}_efficientnet_b0_seed42"
+
+    def encoder(*args, **kwargs):
+        return EncoderParts(
+            nn.Conv2d(3, 4, 1), nn.AdaptiveAvgPool2d(1), 4, nn.Identity(), "synthetic"
+        )
+
+    def new_loaders(*args, **kwargs):
+        return {
+            k: DataLoader(
+                TinyDataset(split="train" if k == "train" else "validation"),
+                batch_size=4,
+                shuffle=k == "train",
+                generator=torch.Generator().manual_seed(42),
+            )
+            for k in ("train", "task1", "task2")
+        }
+
+    monkeypatch.setattr(systems, "build_encoder", encoder)
+    monkeypatch.setattr(training, "build_model", systems.build_model)
+    monkeypatch.setattr(training, "training_loaders", new_loaders)
+    monkeypatch.setattr(
+        evaluation, "evaluate", lambda *a, **k: pytest.fail("test evaluator called")
+    )
+    full = execute(c, root, c["experiment_id"])
+    assert full["status"] == "completed"
+    run = root / "experiments/runs" / c["experiment_id"]
+    frozen = json.loads((run / "frozen_checkpoint.json").read_text())
+    if system.startswith("dedicated"):
+        assert set(frozen["components"]) == {"task1", "task2"}
+        states = [artifacts.load_checkpoint(frozen["components"][k]) for k in ("task1", "task2")]
+        assert [s["component"] for s in states] == ["task1", "task2"]
+        assert all(s["config_hash"] == frozen["config_hash"] for s in states)
+    results = results_registry.read_csv(root / "results/master_results.csv")
+    endpoint = [
+        r
+        for r in results
+        if r["run_id"] == c["experiment_id"] and r["evaluation_mode"] == "endpoint"
+    ][0]
+    assert endpoint["split"] == "validation"
+    frame = pd.read_csv(root / endpoint["prediction_path"], float_precision="round_trip")
+    assert len(frame) == 8
+    assert abs(frame[[f"probability_{i}" for i in range(4)]].sum(axis=1) - 1).max() < 1e-6
+    before = (root / "results/master_results.csv").read_bytes()
+    results_registry.rebuild(root)
+    assert (root / "results/master_results.csv").read_bytes() == before
+    real = training.training_epoch
+    count = []
+
+    def interrupted(*args, **kwargs):
+        count.append(1)
+        if len(count) == 2:
+            raise RuntimeError("synthetic interruption")
+        return real(*args, **kwargs)
+
+    monkeypatch.setattr(training, "training_epoch", interrupted)
+    with pytest.raises(RuntimeError, match="synthetic interruption"):
+        execute(c, root, "resumed_" + system)
+    monkeypatch.setattr(training, "training_epoch", real)
+    resumed = execute(c, root, "resumed_" + system, True)
+    assert resumed["status"] == "completed"
+    ref = json.loads(
+        (root / f"experiments/runs/resumed_{system}/frozen_checkpoint.json").read_text()
+    )
+    left, right = artifacts.load_checkpoint(frozen["best"]), artifacts.load_checkpoint(ref["best"])
+    assert left["history"] == right["history"]
+    assert all(
+        torch.equal(v, right["model_state_dict"][k]) for k, v in left["model_state_dict"].items()
+    )

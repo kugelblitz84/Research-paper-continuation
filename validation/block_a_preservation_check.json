@@ -1,0 +1,20 @@
+{
+  "base_commit": "9a281dc",
+  "protected_file_count": 51,
+  "changed_protected_files": [],
+  "modified_existing_files": [
+    ".gitignore",
+    "README.md",
+    "src/config.py",
+    "src/data.py",
+    "src/evaluation.py",
+    "src/losses.py",
+    "src/models/systems.py",
+    "src/routing.py",
+    "src/training.py",
+    "tests/test_workflow.py"
+  ],
+  "real_training_performed": false,
+  "frozen_test_inference_performed": false,
+  "production_new_system_policy": "pending researcher decision"
+}

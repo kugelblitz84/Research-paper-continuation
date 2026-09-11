@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: mobilenet_v3_large
+system_type: dedicated_hard
+experiment_id: dedicated_hard_mobilenet_v3_large_seed42

@@ -1,0 +1,4 @@
+protocol: configs/protocol.yaml
+architecture: densenet169
+system_type: shared_soft
+experiment_id: shared_soft_densenet169_seed42

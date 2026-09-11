@@ -16,3 +16,14 @@
 
 *.egg-info/
 .ruff_cache/
+
+# Lightweight scientific evidence is reviewable in Git; tensor files stay ignored.
+!/experiments/runs/**/
+!/experiments/runs/**/*.json
+!/experiments/runs/**/config_snapshot.yaml
+!/experiments/runs/**/history.csv
+!/experiments/runs/**/logs/
+!/experiments/runs/**/logs/*.jsonl
+!/experiments/runs/**/logs/*.log
+!/experiments/evaluations/**/
+!/experiments/evaluations/**/evaluation.json

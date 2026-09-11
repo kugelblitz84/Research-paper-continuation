@@ -43,6 +43,9 @@ def load_config(path):
     if experiment["architecture"] not in ARCHITECTURES or experiment["system_type"] not in (
         "flat",
         "shared_hard",
+        "shared_soft",
+        "dedicated_hard",
+        "dedicated_soft",
     ):
         raise ValueError("Unsupported baseline system/backbone")
     protocol_path = (ROOT / experiment["protocol"]).resolve()

@@ -4,9 +4,11 @@ An organized notebook-first reconstruction of the historical Flat versus Shared-
 experiment. Reusable implementations live in `src/`; notebooks configure, call,
 display and save. This is a clean rebuild, not a runtime wrapper around the old repo.
 
-**Build gate: no real training has been run.** Review [the handover](docs/BUILD_HANDOVER.md)
-before authorizing EfficientNet-B0 Flat and Shared-Hard on Azure. Six other pairs
-are implemented and remain training-gated pending the B0 reproduction review.
+**Current state:** the registry preserves completed EfficientNet-B0 Flat and Shared-Hard
+runs. See [Block-A infrastructure](docs/BLOCK_A_INFRASTRUCTURE.md) for the five-system,
+seven-backbone matrix, result indexing, and safe execution interfaces. H2-H4 training
+awaits the [explicit selection-policy decision](docs/BLOCK_A_PROTOCOL_PROPOSAL.md).
+The original other-backbone reproduction-review gate remains in force.
 
 ## Start here
 
@@ -49,7 +51,7 @@ torchvision 0.28.0+cpu. CPU validation is not CUDA validation.
 The exact source-to-implementation map is in
 [HISTORICAL_PROTOCOL_AUDIT.md](docs/HISTORICAL_PROTOCOL_AUDIT.md).
 [Unresolved items](docs/UNRESOLVED_PROTOCOL_ITEMS.md) distinguish missing evidence
-from implemented behavior. The DOCX roadmaps' future systems are not implemented.
+from implemented behavior. The new H2-H4 architecture and orchestration additions are described in the Block-A documentation; their scientific extension remains pending.
 
 ## Repository layout
 
@@ -59,7 +61,7 @@ configs/protocol_lock.json            scientific configuration digest
 configs/experiments/flat/             seven architecture selections
 configs/experiments/shared_hard/      seven architecture selections
 data/manifests/                      original CSV bytes + SHA-256 locks
-src/models/                          central encoder factory and two systems
+src/models/                          central encoder factory and five systems
 src/                                 data, transforms, losses, training, evaluation,
                                      routing, metrics, statistics, provenance, reporting
 notebooks/00_... through 05_...       researcher workflow

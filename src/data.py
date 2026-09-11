@@ -182,6 +182,12 @@ def training_loaders(config, data_root, *, workers=None):
     v = SkinDataset(config, "isic", "validation", data_root, verify=True)
     if config["system_type"] == "flat":
         datasets = {"train": a, "validation": v}
+    elif config["system_type"] != "shared_hard":
+        datasets = {
+            "train": a,
+            "task1": v,
+            "task2": Subset(v, v.frame.index[v.frame.target > 0].tolist()),
+        }
     else:
         b = SkinDataset(config, "stage3", "train", data_root, train=True, verify=True)
         w = SkinDataset(config, "stage3", "validation", data_root, verify=True)
