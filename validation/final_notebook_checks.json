@@ -1,0 +1,12 @@
+[
+  {
+    "notebook": "08_final_internal_test_evaluation.ipynb",
+    "fresh_kernel": "PASS",
+    "inference": false
+  },
+  {
+    "notebook": "09_final_35_cell_comparison.ipynb",
+    "fresh_kernel": "PASS",
+    "inference": false
+  }
+]

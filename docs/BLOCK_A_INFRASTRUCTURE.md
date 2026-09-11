@@ -1,4 +1,4 @@
-﻿# Block-A infrastructure and pending protocol decision
+# Block-A infrastructure and pending protocol decision
 
 The repository now represents F (Flat), H1 (Shared-Hard), H2 (Shared-Soft), H3
 (Dedicated-Hard), and H4 (Dedicated-Soft), across DenseNet121, DenseNet169,
@@ -34,7 +34,10 @@ python -m src.run_experiment --system shared_soft --backbone efficientnet_b0 --s
 
 Set `SKIN_CANCER_DATA_ROOT` first. The CLI is an explicit training request; the
 Python `run_experiment` API defaults to `allow_training=False`. Training notebooks
-06-08 default to `RUN_TRAINING=False`; notebook 09 defaults to `REBUILD_INDEX=False`.
+04-06 default to `RUN_TRAINING=False`; notebook 07 defaults to `REBUILD_INDEX=False`.
+Notebook 08 performs explicitly requested final evaluation after all training/validation;
+notebook 09 consolidates saved results into paper tables and figures. Both are safe by default.
+See [the notebook workflow](../notebooks/README.md).
 No runner automatically evaluates test data. The original other-backbone
 reproduction-review gate remains in force.
 

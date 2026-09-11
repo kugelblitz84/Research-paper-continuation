@@ -13,7 +13,7 @@ The original other-backbone reproduction-review gate remains in force.
 ## Start here
 
 Open [00_environment_and_protocol_audit.ipynb](notebooks/00_environment_and_protocol_audit.ipynb).
-Follow notebooks 00 through 05 in order. Every notebook runs in a fresh kernel with
+Follow active notebooks 00 through 09 in order; see [the notebook workflow](notebooks/README.md). Every notebook runs in a fresh kernel with
 safe defaults. Missing images/checkpoints are shown as not configured/not run.
 
 On this Windows workspace, the isolated Python environment is already installed:
@@ -64,7 +64,7 @@ data/manifests/                      original CSV bytes + SHA-256 locks
 src/models/                          central encoder factory and five systems
 src/                                 data, transforms, losses, training, evaluation,
                                      routing, metrics, statistics, provenance, reporting
-notebooks/00_... through 05_...       researcher workflow
+notebooks/00_... through 09_...       researcher workflow
 tests/                               CPU unit and synthetic integration tests
 tools/                               notebook QA and historical evidence replay
 experiments/experiment_registry.csv   append-only run-state events

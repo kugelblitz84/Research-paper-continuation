@@ -1,0 +1,38 @@
+[
+  {
+    "original": "04_internal_test_evaluation.ipynb",
+    "current": "archive/04_internal_test_evaluation.ipynb",
+    "sha256": "d2fd78baded0c4ac6481423e27f9b6bcecdf8cbfa9eeda85d3c88fe17f71fe1a",
+    "bytes_preserved": true
+  },
+  {
+    "original": "05_flat_vs_hierarchical_comparison.ipynb",
+    "current": "archive/05_flat_vs_hierarchical_comparison.ipynb",
+    "sha256": "8090d0fc2db2464e6d98322f81e46aadbe9756698c4bd66775d79a3a9982d92e",
+    "bytes_preserved": true
+  },
+  {
+    "original": "06_shared_soft_training.ipynb",
+    "current": "04_shared_soft_training.ipynb",
+    "sha256": "d59a3fc812ab4e49426ce063ce65c47c0afc1a82d6bf409f9dccbd37ea175761",
+    "bytes_preserved": true
+  },
+  {
+    "original": "07_dedicated_hard_training.ipynb",
+    "current": "05_dedicated_hard_training.ipynb",
+    "sha256": "9a6d9f1b3bb850f174449584467151dee0b0f1c5f029579d4e70402b5e611d7b",
+    "bytes_preserved": true
+  },
+  {
+    "original": "08_dedicated_soft_training.ipynb",
+    "current": "06_dedicated_soft_training.ipynb",
+    "sha256": "12c3cc41151c283f28e7ff95dd4e040b5e66759e64f7a8955fcfb2ac01aa1376",
+    "bytes_preserved": true
+  },
+  {
+    "original": "09_block_a_status.ipynb",
+    "current": "07_block_a_status.ipynb",
+    "sha256": "476cfb1c312e4c4ba4d670e8dfd9e333a1f9bb5df3e2feab5e020186dea259f0",
+    "bytes_preserved": true
+  }
+]
