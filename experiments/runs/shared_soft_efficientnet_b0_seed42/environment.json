@@ -1,0 +1,11 @@
+{
+  "python": "3.11.9 (main, Aug 14 2024, 05:07:28) [Clang 18.1.8 ]",
+  "torch": "2.13.0+cu126",
+  "torchvision": "0.28.0+cu126",
+  "numpy": "2.4.6",
+  "cuda": "12.6",
+  "cudnn": 91002,
+  "gpu": "Tesla T4",
+  "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "git_commit": "aec6780af7703c974326804913a8aef2033af6ef"
+}

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "shared_soft_efficientnet_b0_seed42",
+  "architecture": "efficientnet_b0",
+  "system_type": "shared_soft",
+  "seed": 42,
+  "config_path": "configs/experiments/shared_soft/efficientnet_b0.yaml",
+  "manifest_hash": "bba1b8c962cc8b492afa09bdde517572690d764a4fc61d0200b19fe341ba824e",
+  "start_time": "2026-09-11T10:08:40.496802+00:00",
+  "end_time": "2026-09-11T10:56:38.555712+00:00",
+  "best_epoch": 14,
+  "selection_metric": "validation_macro_f1",
+  "best_validation_score": 0.6648576155752255,
+  "checkpoint_path": "models/checkpoints/shared_soft_efficientnet_b0_seed42/epoch_014_dee55813/best.pt",
+  "status": "completed",
+  "config_hash": "9543452161fc5a2a2d00b39d618e2a55ad323903b9c0c389fa0faf2b63c7c616",
+  "protocol_hash": "1b4a63c8dda7956f0755f8a132e1d7042945a1761d55e6b3e81d9cf58868e796",
+  "extension_version": "block_a_two_task_v1",
+  "extension_hash": "2126d125ae9b0776a652ee55cdef8aa99a3e9ad6f46ed04ae9526203fc8c8b57",
+  "checkpoint_sha256": "1af6fa35a834121054faae9a73cdc9d7c3370d5c5fd402bc236992a6dacf1ec1",
+  "validation_macro_f1": 0.6648576155752255,
+  "training_duration_seconds": 2878.096223455
+}

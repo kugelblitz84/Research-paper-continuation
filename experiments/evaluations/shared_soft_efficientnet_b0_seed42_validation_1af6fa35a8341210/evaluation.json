@@ -1,0 +1,271 @@
+{
+  "run_id": "shared_soft_efficientnet_b0_seed42",
+  "architecture": "efficientnet_b0",
+  "system_type": "shared_soft",
+  "seed": 42,
+  "split": "validation",
+  "sample_count": 3668,
+  "prediction_path": "results/predictions/shared_soft_efficientnet_b0_seed42_validation_1af6fa35a8341210.csv",
+  "prediction_sha256": "2901b92ab332885204d55ce8cf712288c5e2a66e29ecab50d2c10c2c7aed301b",
+  "checkpoint": {
+    "path": "models/checkpoints/shared_soft_efficientnet_b0_seed42/epoch_014_dee55813/best.pt",
+    "sha256": "1af6fa35a834121054faae9a73cdc9d7c3370d5c5fd402bc236992a6dacf1ec1"
+  },
+  "components": {},
+  "config_hash": "9543452161fc5a2a2d00b39d618e2a55ad323903b9c0c389fa0faf2b63c7c616",
+  "manifest_hashes": {
+    "isic": "4aff7b36a942ba19144c01d22910f356534d45603b00844d242e4021892fc906",
+    "stage3": "1f2296af7caf2a2520ab8f288a026e42c475d35d66ac9f488e05947a2a843895"
+  },
+  "protocol_version": "full30_baseline_v1",
+  "protocol_hash": "1b4a63c8dda7956f0755f8a132e1d7042945a1761d55e6b3e81d9cf58868e796",
+  "environment": {
+    "python": "3.11.9 (main, Aug 14 2024, 05:07:28) [Clang 18.1.8 ]",
+    "torch": "2.13.0+cu126",
+    "torchvision": "0.28.0+cu126",
+    "numpy": "2.4.6",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "Tesla T4",
+    "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "git_commit": "aec6780af7703c974326804913a8aef2033af6ef"
+  },
+  "created_at": "2026-09-11T10:56:38.546905+00:00",
+  "metrics": {
+    "endpoint": {
+      "sample_count": 3668,
+      "accuracy": 0.7786259541984732,
+      "balanced_accuracy": 0.693330448496414,
+      "macro_f1": 0.6648576155752255,
+      "weighted_f1": 0.7864765384934969,
+      "macro_precision": 0.6491370721152601,
+      "macro_recall": 0.693330448496414,
+      "confusion_matrix": [
+        [
+          1906,
+          358,
+          117,
+          17
+        ],
+        [
+          109,
+          547,
+          16,
+          6
+        ],
+        [
+          46,
+          56,
+          361,
+          35
+        ],
+        [
+          25,
+          1,
+          26,
+          42
+        ]
+      ],
+      "class_names": [
+        "non_malignant",
+        "melanoma",
+        "bcc",
+        "scc"
+      ],
+      "per_class": {
+        "non_malignant": {
+          "precision": 0.9137104506232023,
+          "recall": 0.7948290241868223,
+          "f1": 0.8501338090990188,
+          "support": 2398
+        },
+        "melanoma": {
+          "precision": 0.5686070686070686,
+          "recall": 0.8067846607669616,
+          "f1": 0.6670731707317074,
+          "support": 678
+        },
+        "bcc": {
+          "precision": 0.6942307692307692,
+          "recall": 0.7248995983935743,
+          "f1": 0.7092337917485266,
+          "support": 498
+        },
+        "scc": {
+          "precision": 0.42,
+          "recall": 0.44680851063829785,
+          "f1": 0.43298969072164945,
+          "support": 94
+        }
+      }
+    },
+    "oracle": {
+      "sample_count": 3668,
+      "accuracy": 0.9531079607415486,
+      "balanced_accuracy": 0.835931940906159,
+      "macro_f1": 0.829280642594437,
+      "weighted_f1": 0.9532663360416134,
+      "macro_precision": 0.8254173508268227,
+      "macro_recall": 0.835931940906159,
+      "confusion_matrix": [
+        [
+          2398,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          646,
+          21,
+          11
+        ],
+        [
+          0,
+          60,
+          396,
+          42
+        ],
+        [
+          0,
+          4,
+          34,
+          56
+        ]
+      ],
+      "class_names": [
+        "non_malignant",
+        "melanoma",
+        "bcc",
+        "scc"
+      ],
+      "per_class": {
+        "non_malignant": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2398
+        },
+        "melanoma": {
+          "precision": 0.9098591549295775,
+          "recall": 0.9528023598820059,
+          "f1": 0.9308357348703171,
+          "support": 678
+        },
+        "bcc": {
+          "precision": 0.8780487804878049,
+          "recall": 0.7951807228915663,
+          "f1": 0.8345626975763962,
+          "support": 498
+        },
+        "scc": {
+          "precision": 0.5137614678899083,
+          "recall": 0.5957446808510638,
+          "f1": 0.5517241379310345,
+          "support": 94
+        }
+      }
+    },
+    "stage1": {
+      "sample_count": 3668,
+      "accuracy": 0.8132497273718647,
+      "balanced_accuracy": 0.8256897151825997,
+      "macro_f1": 0.8043334954425757,
+      "weighted_f1": 0.8171783353100572,
+      "macro_precision": 0.7991544504078454,
+      "macro_recall": 0.8256897151825997,
+      "confusion_matrix": [
+        [
+          1883,
+          515
+        ],
+        [
+          170,
+          1100
+        ]
+      ],
+      "class_names": [
+        "non_malignant",
+        "malignant"
+      ],
+      "per_class": {
+        "non_malignant": {
+          "precision": 0.9171943497320993,
+          "recall": 0.7852376980817348,
+          "f1": 0.8461019995506628,
+          "support": 2398
+        },
+        "malignant": {
+          "precision": 0.6811145510835913,
+          "recall": 0.8661417322834646,
+          "f1": 0.7625649913344886,
+          "support": 1270
+        }
+      }
+    },
+    "stage2_malignant_subset": {
+      "sample_count": 1270,
+      "accuracy": 0.8645669291338582,
+      "balanced_accuracy": 0.7812425878748787,
+      "macro_f1": 0.772374190125916,
+      "weighted_f1": 0.8650243469296358,
+      "macro_precision": 0.7672231344357635,
+      "macro_recall": 0.7812425878748787,
+      "confusion_matrix": [
+        [
+          646,
+          21,
+          11
+        ],
+        [
+          60,
+          396,
+          42
+        ],
+        [
+          4,
+          34,
+          56
+        ]
+      ],
+      "class_names": [
+        "melanoma",
+        "bcc",
+        "scc"
+      ],
+      "per_class": {
+        "melanoma": {
+          "precision": 0.9098591549295775,
+          "recall": 0.9528023598820059,
+          "f1": 0.9308357348703171,
+          "support": 678
+        },
+        "bcc": {
+          "precision": 0.8780487804878049,
+          "recall": 0.7951807228915663,
+          "f1": 0.8345626975763962,
+          "support": 498
+        },
+        "scc": {
+          "precision": 0.5137614678899083,
+          "recall": 0.5957446808510638,
+          "f1": 0.5517241379310345,
+          "support": 94
+        }
+      }
+    },
+    "routing": {
+      "malignant_false_negative": 170,
+      "nonmalignant_false_positive": 515,
+      "malignant_sensitivity": 0.8661417322834646,
+      "oracle_gap": 0.16442302701921152
+    }
+  },
+  "best_epoch": 14,
+  "selection_metric": "validation_macro_f1",
+  "selection_score": 0.6648576155752255,
+  "training_duration_seconds": 2863.8992873419998,
+  "gpu_hours": 0.7955275798172221,
+  "parameter_count": 4013953,
+  "model_count": 1
+}
