@@ -1,4 +1,4 @@
-protocol_version: historical_baseline_v1
+protocol_version: full30_baseline_v1
 seed: 42
 pretrained: imagenet
 dropout: 0.2
@@ -72,7 +72,7 @@ losses:
   - 1.8778238443799093
 training:
   epochs: 30
-  patience: 7
+  patience: 30
   amp: true
   optimizer: adamw
   lr: 0.0003
