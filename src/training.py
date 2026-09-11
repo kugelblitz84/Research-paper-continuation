@@ -18,7 +18,7 @@ from src.artifacts import (
     utc_now,
     write_json,
 )
-from src.config import CLASSES, ROOT, TASK_CLASSES, digest, validate_runtime_config
+from src.config import CLASSES, ROOT, TASK_CLASSES, baseline_protocol, digest, validate_runtime_config
 from src.data import audit_manifests, resolve_data_root, training_loaders, verify_images
 from src.losses import MaskedLoss
 from src.metrics import classification_metrics
@@ -171,18 +171,7 @@ def _allow_backbone(config):
         raise RuntimeError("Remaining six pairs are locked until B0 reproduction review")
     approval = json.loads(gate.read_text())
     if approval.get("status") != "accepted" or approval.get("protocol_digest") != digest(
-        {
-            k: v
-            for k, v in config.items()
-            if k
-            not in (
-                "architecture",
-                "system_type",
-                "experiment_id",
-                "config_path",
-                "protocol",
-            )
-        }
+        baseline_protocol(config)
     ):
         raise RuntimeError("B0 reproduction gate absent or incompatible")
     for ref in approval["evidence"]:
@@ -216,8 +205,7 @@ def train(
         return {"experiment_id": config["experiment_id"], "status": action}
     if config["system_type"] not in config["selection"]:
         raise ValueError(
-            "New system selection policy is absent from the frozen protocol; "
-            "an explicitly approved protocol extension is required"
+            "Unsupported checkpoint-selection policy in resolved configuration"
         )
     _allow_backbone(config)
     preflight(config, data_root)
@@ -275,22 +263,10 @@ def _run(config, directory, run_id, data_root, device, resume):
         checkpoint_path="",
         status="running",
         config_hash=config_hash,
-        protocol_hash=digest(
-            {
-                k: v
-                for k, v in config.items()
-                if k
-                not in (
-                    "architecture",
-                    "system_type",
-                    "experiment_id",
-                    "config_path",
-                    "protocol",
-                    "block_a_extension",
-                )
-            }
-        ),
+        protocol_hash=digest(baseline_protocol(config)),
     )
+    if "extension_hash" in config:
+        row.update(extension_version=config["extension_version"], extension_hash=config["extension_hash"])
     append_registry(row)
     write_json(directory / "run_summary.json", row)
     try:
@@ -377,6 +353,8 @@ def _run(config, directory, run_id, data_root, device, resume):
                 start_time=row["start_time"],
                 run_id=run_id,
             )
+            if "extension_hash" in config:
+                payload.update(extension_version=config["extension_version"], extension_hash=config["extension_hash"])
             generation = (
                 ROOT / "models/checkpoints" / run_id / f"epoch_{epoch:03d}_{uuid.uuid4().hex[:8]}"
             )

@@ -6,8 +6,8 @@ display and save. This is a clean rebuild, not a runtime wrapper around the old 
 
 **Current state:** the registry preserves completed EfficientNet-B0 Flat and Shared-Hard
 runs. See [Block-A infrastructure](docs/BLOCK_A_INFRASTRUCTURE.md) for the five-system,
-seven-backbone matrix, result indexing, and safe execution interfaces. H2-H4 training
-awaits the [explicit selection-policy decision](docs/BLOCK_A_PROTOCOL_PROPOSAL.md).
+seven-backbone matrix, result indexing, and safe execution interfaces. The
+H2-H4 two-task protocol extension is approved as `block_a_two_task_v1`.
 The original other-backbone reproduction-review gate remains in force.
 
 ## Start here

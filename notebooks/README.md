@@ -1,4 +1,4 @@
-﻿# Notebook workflow
+# Notebook workflow
 
 Run the active notebooks in numeric order. Training and development finish before
 final frozen-test evaluation and comparison.
@@ -63,5 +63,6 @@ These are descriptive figures; they do not invent confidence intervals or p-valu
 Paired inference requires saved per-image predictions and a predefined comparison
 and multiplicity plan. H1 retains its historical auxiliary third task/selection
 rule. Test comparisons do not change the validation-selected hierarchy or trigger
-further experimental blocks. The pending H2-H4 protocol decision is unchanged by
-this notebook reordering.
+further experimental blocks. The H2-H4 protocol extension is approved as `block_a_two_task_v1`.
+H2/H3/H4 use four-class endpoint validation macro-F1 for checkpoint selection;
+historical H1 retains its original three-task selection rule.

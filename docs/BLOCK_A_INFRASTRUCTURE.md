@@ -6,10 +6,11 @@ ResNet50, MobileNetV3-Large, EfficientNet-B0, EfficientNet-B2, and EfficientNet-
 These are 35 system cells, or 49 independent network instances when each cell is
 trained independently. H1 retains its existing third auxiliary T-category head.
 
-**Production H2-H4 training is currently gated.** The existing protocol lock defines
-three-task H1 selection and no selection rule for H2-H4. See
-[the concrete proposal](BLOCK_A_PROTOCOL_PROPOSAL.md). No scientific protocol or
-manifest has been changed. Synthetic tests inject their own temporary policy.
+**Production H2-H4 training is protocol-enabled.** The approved two-task extension is
+`configs/block_a_extension.yaml`, version `block_a_two_task_v1`, with semantic digest
+`2126d125ae9b0776a652ee55cdef8aa99a3e9ad6f46ed04ae9526203fc8c8b57`.
+H2/H3/H4 select checkpoints by four-class endpoint validation macro-F1.
+The frozen baseline protocol and historical H1 behavior remain unchanged.
 
 ## Configuration and execution
 
@@ -26,7 +27,7 @@ python -m src.run_block_a --status
 python -m src.results_registry rebuild
 ```
 
-Once the scientific extension is approved, the intended first Azure experiment is:
+The first production verification experiment is:
 
 ```text
 python -m src.run_experiment --system shared_soft --backbone efficientnet_b0 --seed 42
