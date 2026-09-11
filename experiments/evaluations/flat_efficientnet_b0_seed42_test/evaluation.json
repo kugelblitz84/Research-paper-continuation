@@ -1,0 +1,99 @@
+{
+  "run_id": "flat_efficientnet_b0_seed42",
+  "architecture": "efficientnet_b0",
+  "system_type": "flat",
+  "split": "test",
+  "sample_count": 3668,
+  "prediction_path": "results/predictions/flat_efficientnet_b0_seed42_test.csv",
+  "prediction_sha256": "c62b095639c99dd2228dbc8e5c3046e65fcb44f7bafba303ed461879bc5980bb",
+  "checkpoint": {
+    "path": "models/checkpoints/flat_efficientnet_b0_seed42/epoch_005_dd7f1ae1/best.pt",
+    "sha256": "fe13734dcfee1bf945b4651fcb819c957506f1bacf7312c18520a5b837594b8e"
+  },
+  "manifest_hashes": {
+    "isic": "4aff7b36a942ba19144c01d22910f356534d45603b00844d242e4021892fc906",
+    "stage3": "1f2296af7caf2a2520ab8f288a026e42c475d35d66ac9f488e05947a2a843895"
+  },
+  "config_hash": "e9bb47a6117aaa585a978e849d78d8c98df340643ccc06ba688f14cfa3da92c0",
+  "environment": {
+    "python": "3.11.9 (main, Aug 14 2024, 05:07:28) [Clang 18.1.8 ]",
+    "torch": "2.13.0+cu126",
+    "torchvision": "0.28.0+cu126",
+    "numpy": "2.4.6",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "Tesla T4",
+    "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "git_commit": "21a6e017b6d7e096ba4b68419c5a3403a90cc6b4"
+  },
+  "created_at": "2026-09-11T06:47:32.640841+00:00",
+  "metrics": {
+    "endpoint": {
+      "sample_count": 3668,
+      "accuracy": 0.7649945474372956,
+      "balanced_accuracy": 0.6312327538117815,
+      "macro_f1": 0.630631373331878,
+      "weighted_f1": 0.7694328646423094,
+      "macro_precision": 0.6499140859437222,
+      "macro_recall": 0.6312327538117815,
+      "confusion_matrix": [
+        [
+          1933,
+          356,
+          90,
+          19
+        ],
+        [
+          168,
+          485,
+          23,
+          2
+        ],
+        [
+          78,
+          50,
+          362,
+          8
+        ],
+        [
+          24,
+          10,
+          34,
+          26
+        ]
+      ],
+      "class_names": [
+        "non_malignant",
+        "melanoma",
+        "bcc",
+        "scc"
+      ],
+      "per_class": {
+        "non_malignant": {
+          "precision": 0.8774398547435316,
+          "recall": 0.8060884070058382,
+          "f1": 0.8402521191045426,
+          "support": 2398
+        },
+        "melanoma": {
+          "precision": 0.5382907880133185,
+          "recall": 0.7153392330383481,
+          "f1": 0.6143128562381255,
+          "support": 678
+        },
+        "bcc": {
+          "precision": 0.7111984282907662,
+          "recall": 0.7269076305220884,
+          "f1": 0.7189672293942404,
+          "support": 498
+        },
+        "scc": {
+          "precision": 0.4727272727272727,
+          "recall": 0.2765957446808511,
+          "f1": 0.3489932885906041,
+          "support": 94
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "best": {
+    "path": "models/checkpoints/flat_efficientnet_b0_seed42/epoch_005_dd7f1ae1/best.pt",
+    "sha256": "fe13734dcfee1bf945b4651fcb819c957506f1bacf7312c18520a5b837594b8e"
+  },
+  "config_hash": "e9bb47a6117aaa585a978e849d78d8c98df340643ccc06ba688f14cfa3da92c0",
+  "manifest_hashes": {
+    "isic": "4aff7b36a942ba19144c01d22910f356534d45603b00844d242e4021892fc906",
+    "stage3": "1f2296af7caf2a2520ab8f288a026e42c475d35d66ac9f488e05947a2a843895"
+  },
+  "frozen_at": "2026-09-10T18:35:51.693989+00:00"
+}

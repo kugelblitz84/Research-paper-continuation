@@ -1,0 +1,12 @@
+{
+  "best": {
+    "path": "models/checkpoints/shared_hard_efficientnet_b0_seed42/epoch_013_e0727c64/best.pt",
+    "sha256": "d9871e3d68606f13568383b9c5f90670ae3b189801744294c3d0ba05bf498fb0"
+  },
+  "config_hash": "80870a870afb648bef498a6baf95a3a53198eefd160085c9731c65407b01f3c1",
+  "manifest_hashes": {
+    "isic": "4aff7b36a942ba19144c01d22910f356534d45603b00844d242e4021892fc906",
+    "stage3": "1f2296af7caf2a2520ab8f288a026e42c475d35d66ac9f488e05947a2a843895"
+  },
+  "frozen_at": "2026-09-10T19:40:47.741762+00:00"
+}

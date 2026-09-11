@@ -1,0 +1,15 @@
+{
+  "experiment_id": "shared_hard_efficientnet_b0_seed42",
+  "architecture": "efficientnet_b0",
+  "system_type": "shared_hard",
+  "seed": 42,
+  "config_path": "configs/experiments/shared_hard/efficientnet_b0.yaml",
+  "manifest_hash": "bba1b8c962cc8b492afa09bdde517572690d764a4fc61d0200b19fe341ba824e",
+  "start_time": "2026-09-10T18:45:06.950668+00:00",
+  "end_time": "2026-09-10T19:40:47.741732+00:00",
+  "best_epoch": 13,
+  "selection_metric": "mean_task1_task2_task3_macro_f1",
+  "best_validation_score": 0.683243581876832,
+  "checkpoint_path": "models/checkpoints/shared_hard_efficientnet_b0_seed42/epoch_013_e0727c64/best.pt",
+  "status": "completed"
+}

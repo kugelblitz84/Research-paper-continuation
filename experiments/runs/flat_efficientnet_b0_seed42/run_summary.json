@@ -1,0 +1,15 @@
+{
+  "experiment_id": "flat_efficientnet_b0_seed42",
+  "architecture": "efficientnet_b0",
+  "system_type": "flat",
+  "seed": 42,
+  "config_path": "configs/experiments/flat/efficientnet_b0.yaml",
+  "manifest_hash": "bba1b8c962cc8b492afa09bdde517572690d764a4fc61d0200b19fe341ba824e",
+  "start_time": "2026-09-10T17:48:18.194325+00:00",
+  "end_time": "2026-09-10T18:35:51.693969+00:00",
+  "best_epoch": 5,
+  "selection_metric": "validation_macro_f1",
+  "best_validation_score": 0.6504898607805603,
+  "checkpoint_path": "models/checkpoints/flat_efficientnet_b0_seed42/epoch_005_dd7f1ae1/best.pt",
+  "status": "completed"
+}

@@ -1,0 +1,101 @@
+protocol_version: full30_baseline_v1
+seed: 42
+pretrained: imagenet
+dropout: 0.2
+classes:
+- non_malignant
+- melanoma
+- bcc
+- scc
+manifests:
+  isic: data/manifests/isic2019_train_val_test_split_seed42.csv
+  stage3: data/manifests/emb_stage03_dermoscopic_split_seed42.csv
+expected_counts:
+  isic:
+    train: 17124
+    validation: 3668
+    test: 3668
+  stage3:
+    train: 594
+    validation: 127
+    test: 127
+transforms:
+  size: 224
+  resize: 256
+  crop_scale:
+  - 0.85
+  - 1.0
+  crop_ratio:
+  - 0.9
+  - 1.1
+  flip: 0.5
+  rotation: 15.0
+  jitter:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.02
+  mean:
+  - 0.485
+  - 0.456
+  - 0.406
+  std:
+  - 0.229
+  - 0.224
+  - 0.225
+loader:
+  batch_size: 64
+  workers: 4
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 2
+losses:
+  flat: cross_entropy
+  task1: cross_entropy
+  task2: class_balanced_focal
+  task3: weighted_cross_entropy
+  beta: 0.9999
+  gamma: 2.0
+  task_weights:
+  - 1.0
+  - 1.0
+  - 1.0
+  task2_weights:
+  - 0.3485376280807543
+  - 0.4553489231324597
+  - 2.196113448786786
+  task3_weights:
+  - 0.063475735584673
+  - 0.12246677245955931
+  - 0.682845034319967
+  - 2.253388613255891
+  - 1.8778238443799093
+training:
+  epochs: 30
+  patience: 30
+  amp: true
+  optimizer: adamw
+  lr: 0.0003
+  weight_decay: 0.0001
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  scheduler: cosine
+  t_max: 30
+  eta_min: 1.0e-06
+selection:
+  flat: validation_macro_f1
+  shared_hard: mean_task1_task2_task3_macro_f1
+statistics:
+  replicates: 10000
+  seed: 42
+  confidence: 0.95
+  quantile: linear
+  method: paired_truth_stratified
+  direction: shared_hard_minus_flat
+protocol: configs/protocol.yaml
+architecture: efficientnet_b0
+system_type: shared_hard
+experiment_id: shared_hard_efficientnet_b0_seed42
+config_path: configs/experiments/shared_hard/efficientnet_b0.yaml

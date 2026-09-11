@@ -44,7 +44,7 @@ def append_registry(row):
         with path.open(newline="", encoding="utf-8") as f:
             columns = next(csv.reader(f))
         with path.open("a", newline="", encoding="utf-8") as f:
-            csv.DictWriter(f, fieldnames=columns).writerow({c: row.get(c, "") for c in columns})
+            csv.DictWriter(f, fieldnames=columns, lineterminator="\n").writerow({c: row.get(c, "") for c in columns})
             f.flush()
             os.fsync(f.fileno())
 

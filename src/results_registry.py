@@ -118,7 +118,7 @@ def atomic_csv(path, rows, columns):
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_name(path.name + "." + uuid.uuid4().hex + ".tmp")
     with temp.open("x", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=columns, extrasaction="raise")
+        writer = csv.DictWriter(f, fieldnames=columns, extrasaction="raise", lineterminator="\n")
         writer.writeheader()
         writer.writerows({c: r.get(c, "") for c in columns} for r in rows)
         f.flush()
