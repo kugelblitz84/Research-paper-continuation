@@ -1,0 +1,10 @@
+{
+  "last": {
+    "path": "models/checkpoints/dedicated_soft_efficientnet_b0_seed42/epoch_030_50c71aa1/last.pt",
+    "sha256": "f1bc0620b26d9853019a2d4a8329764727a14c26f2a40a62ffab2741bffd7dd4"
+  },
+  "best": {
+    "path": "models/checkpoints/dedicated_soft_efficientnet_b0_seed42/epoch_027_85ef6de2/best.pt",
+    "sha256": "9960164c089c7bc14602380547897878ae8460f09d0e936438c41e86591a87a8"
+  }
+}

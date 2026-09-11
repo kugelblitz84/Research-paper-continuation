@@ -1,0 +1,22 @@
+{
+  "best": {
+    "path": "models/checkpoints/dedicated_hard_efficientnet_b0_seed42/epoch_028_366d772f/best.pt",
+    "sha256": "37357a8b05138a0f6a6de8664066386251222fee972779a9a0c5b515ebf70808"
+  },
+  "config_hash": "6e1e3c8a5fcc5cdbc2997aba74492fc73ad151552d32d18f42e1ec5e16e01c00",
+  "manifest_hashes": {
+    "isic": "4aff7b36a942ba19144c01d22910f356534d45603b00844d242e4021892fc906",
+    "stage3": "1f2296af7caf2a2520ab8f288a026e42c475d35d66ac9f488e05947a2a843895"
+  },
+  "frozen_at": "2026-09-11T14:51:49.924186+00:00",
+  "components": {
+    "task1": {
+      "path": "models/checkpoints/dedicated_hard_efficientnet_b0_seed42/epoch_028_366d772f/task1_best.pt",
+      "sha256": "a2fdc0523431125fea52e84a47bb746d25333630843a254b3c651d5ce9fafa45"
+    },
+    "task2": {
+      "path": "models/checkpoints/dedicated_hard_efficientnet_b0_seed42/epoch_028_366d772f/task2_best.pt",
+      "sha256": "0f8cfdc6572ab050907de1209fc86f4c7a1d5c35b5315f1ef62dd931cde49f11"
+    }
+  }
+}

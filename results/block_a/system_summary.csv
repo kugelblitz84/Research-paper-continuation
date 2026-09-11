@@ -2,5 +2,5 @@ system_type,system_code,count,status,mean,median,delta_vs_flat,flat_matched_coun
 flat,F,0,INCOMPLETE,,,,0,,0
 shared_hard,H1,0,INCOMPLETE,,,,0,,0
 shared_soft,H2,1,INCOMPLETE,0.6648576155752255,0.6648576155752255,,0,,0
-dedicated_hard,H3,0,INCOMPLETE,,,,0,,0
-dedicated_soft,H4,0,INCOMPLETE,,,,0,,0
+dedicated_hard,H3,1,INCOMPLETE,0.663850578787164,0.663850578787164,,0,,0
+dedicated_soft,H4,1,INCOMPLETE,0.6609282692136673,0.6609282692136673,,0,,0

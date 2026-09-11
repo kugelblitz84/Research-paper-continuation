@@ -1,0 +1,189 @@
+protocol_version: full30_baseline_v1
+seed: 42
+pretrained: imagenet
+dropout: 0.2
+classes:
+- non_malignant
+- melanoma
+- bcc
+- scc
+manifests:
+  isic: data/manifests/isic2019_train_val_test_split_seed42.csv
+  stage3: data/manifests/emb_stage03_dermoscopic_split_seed42.csv
+expected_counts:
+  isic:
+    train: 17124
+    validation: 3668
+    test: 3668
+  stage3:
+    train: 594
+    validation: 127
+    test: 127
+transforms:
+  size: 224
+  resize: 256
+  crop_scale:
+  - 0.85
+  - 1.0
+  crop_ratio:
+  - 0.9
+  - 1.1
+  flip: 0.5
+  rotation: 15.0
+  jitter:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.02
+  mean:
+  - 0.485
+  - 0.456
+  - 0.406
+  std:
+  - 0.229
+  - 0.224
+  - 0.225
+loader:
+  batch_size: 64
+  workers: 4
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 2
+losses:
+  flat: cross_entropy
+  task1: cross_entropy
+  task2: class_balanced_focal
+  task3: weighted_cross_entropy
+  beta: 0.9999
+  gamma: 2.0
+  task_weights:
+  - 1.0
+  - 1.0
+  - 1.0
+  task2_weights:
+  - 0.3485376280807543
+  - 0.4553489231324597
+  - 2.196113448786786
+  task3_weights:
+  - 0.063475735584673
+  - 0.12246677245955931
+  - 0.682845034319967
+  - 2.253388613255891
+  - 1.8778238443799093
+training:
+  epochs: 30
+  patience: 30
+  amp: true
+  optimizer: adamw
+  lr: 0.0003
+  weight_decay: 0.0001
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  scheduler: cosine
+  t_max: 30
+  eta_min: 1.0e-06
+selection:
+  flat: validation_macro_f1
+  shared_hard: mean_task1_task2_task3_macro_f1
+  shared_soft: validation_macro_f1
+  dedicated_hard: validation_macro_f1
+  dedicated_soft: validation_macro_f1
+statistics:
+  replicates: 10000
+  seed: 42
+  confidence: 0.95
+  quantile: linear
+  method: paired_truth_stratified
+  direction: shared_hard_minus_flat
+block_a_extension:
+  extension_version: block_a_two_task_v1
+  status: approved
+  baseline_protocol:
+    path: configs/protocol.yaml
+    scientific_config_sha256: 1b4a63c8dda7956f0755f8a132e1d7042945a1761d55e6b3e81d9cf58868e796
+    policy: unchanged; Flat and Shared-Hard retain their original resolved configuration
+      identities
+  systems:
+  - shared_soft
+  - dedicated_hard
+  - dedicated_soft
+  selection:
+    shared_soft: validation_macro_f1
+    dedicated_hard: validation_macro_f1
+    dedicated_soft: validation_macro_f1
+  selection_definition:
+    split: validation
+    cohort: isic
+    endpoint_classes:
+    - non_malignant
+    - melanoma
+    - bcc
+    - scc
+    metric: four_class_endpoint_macro_f1
+    dedicated_checkpoint_policy: select one paired epoch by endpoint validation macro-F1;
+      export both component checkpoints and the joint resume checkpoint
+    test_data: excluded from training and checkpoint selection
+  tasks:
+    task1:
+      classes:
+      - non_malignant
+      - malignant
+      training_cohort: frozen ISIC train membership
+      loss_reference: baseline.losses.task1
+    task2:
+      classes:
+      - melanoma
+      - bcc
+      - scc
+      training_cohort: malignant-labelled samples in frozen ISIC train membership
+      loss_reference: baseline.losses.task2
+      weight_reference: baseline.losses.task2_weights
+      gamma_reference: baseline.losses.gamma
+    task3: absent
+  loss_policy:
+    task1: cross_entropy
+    task2: class_balanced_focal
+    formula: existing src.losses.MaskedLoss
+    normalization: existing active-task weighted mean
+    task_weight_reference: baseline.losses.task_weights indices 0 and 1
+  routing:
+    shared_soft:
+      networks: one shared encoder with Task-1 and Task-2 heads
+      probabilities: P(NM)=P1(NM); P(c)=P1(malignant)*P2(c|malignant) for c in MEL,BCC,SCC
+      prediction: argmax of the four endpoint probabilities
+    dedicated_hard:
+      networks: two independent complete networks of the same backbone family; no
+        shared parameters
+      prediction: NM when argmax(Task1)=NM; otherwise argmax(Task2) mapped to MEL,BCC,SCC
+    dedicated_soft:
+      networks: two independent complete networks of the same backbone family; no
+        shared parameters
+      probabilities: P(NM)=P1(NM); P(c)=P1(malignant)*P2(c|malignant) for c in MEL,BCC,SCC
+      prediction: argmax of the four endpoint probabilities
+    confidence_threshold: null
+    threshold_tuning: false
+  inherited_unchanged:
+  - manifests and split memberships
+  - preprocessing and augmentation
+  - image size
+  - pretrained initialization
+  - dropout and classifier-head policy
+  - backbone definitions
+  - optimizer, learning rate, weight decay and scheduler
+  - maximum epochs and patience
+  - seed 42 and batch size
+  - Task-1 and Task-2 loss formulas, weights and gamma
+  historical_h1:
+    task3: retained
+    selection: mean_task1_task2_task3_macro_f1
+    implementation: unchanged
+extension_version: block_a_two_task_v1
+extension_hash: 2126d125ae9b0776a652ee55cdef8aa99a3e9ad6f46ed04ae9526203fc8c8b57
+extension_path: configs/block_a_extension.yaml
+protocol: configs/protocol.yaml
+architecture: efficientnet_b0
+system_type: dedicated_soft
+experiment_id: dedicated_soft_efficientnet_b0_seed42
+config_path: configs/experiments/dedicated_soft/efficientnet_b0.yaml

@@ -1,0 +1,22 @@
+{
+  "best": {
+    "path": "models/checkpoints/dedicated_soft_efficientnet_b0_seed42/epoch_027_85ef6de2/best.pt",
+    "sha256": "9960164c089c7bc14602380547897878ae8460f09d0e936438c41e86591a87a8"
+  },
+  "config_hash": "fe14a5b2ff3506cda241af94cf0576c9e8497b41403f7d4fe6549e7b641caa02",
+  "manifest_hashes": {
+    "isic": "4aff7b36a942ba19144c01d22910f356534d45603b00844d242e4021892fc906",
+    "stage3": "1f2296af7caf2a2520ab8f288a026e42c475d35d66ac9f488e05947a2a843895"
+  },
+  "frozen_at": "2026-09-11T15:54:05.149866+00:00",
+  "components": {
+    "task1": {
+      "path": "models/checkpoints/dedicated_soft_efficientnet_b0_seed42/epoch_027_85ef6de2/task1_best.pt",
+      "sha256": "30a89f16ee24e44ab8151c47ce6d95395a71695aea3d57978671d05f7fb8dda1"
+    },
+    "task2": {
+      "path": "models/checkpoints/dedicated_soft_efficientnet_b0_seed42/epoch_027_85ef6de2/task2_best.pt",
+      "sha256": "50f1adffc868febf1589ef46ad7385942d6c01c96799645a7c22adba9398681b"
+    }
+  }
+}
